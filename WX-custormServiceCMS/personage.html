@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title></title>
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <script src="bootstrap/css/bootstrap.min.js" type="text/javascript"></script>
+    <link href="PCcss.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div class="container-fluid top" >
+    <p class="first"><img class="logo" src="image/logo.png">烟草客服系统后台</p>
+    <a href="question.html" class="btn btn1" role="button" target="leftFrame">问题转接</a>
+    <a href="answer.html" class="btn btn1" role="button" target="leftFrame">问答管理</a>
+    <a href="Info.html" class="btn1 btn" role="button" target="leftFrame">统计信息</a>
+    <a href="account.html" class="btn1 btn" role="button" target="leftFrame">账号权限</a>
+    <a href="user.html" class="btn1 btn" role="button" target="leftFrame">用户管理</a>
+    <a href="structure.html" class="btn1 btn"  role="button" target="leftFrame">结构管理</a>
+    <a href="personage.html" class="btn1 btn" role="button" target="leftFrame">个人设置</a>
+</div>
+<div class="per">
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label for="inputEmail3" class="text col-sm-2 control-label">&nbsp;&nbsp;账号名：</label>
+            <div class="col-sm-10">
+                <p type="text" class="form-control get" id="account">2233we</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputEmail3" class="text col-sm-2 control-label">&nbsp;&nbsp;&nbsp;&nbsp;姓名：</label>
+            <div class="col-sm-10">
+                <p type="text" class="form-control get" id="name">张三</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputEmail3" class="text col-sm-2 control-label">&nbsp;&nbsp;手机号：</label>
+            <div class="col-sm-10">
+                <p type="text" class="form-control get" id="phone">1382388874</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputEmail3" class="text col-sm-2 control-label">&nbsp;&nbsp;&nbsp;&nbsp;昵称：</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control login" id="inputEmail3" placeholder="昵称">
+            </div>
+        </div>
+        <div class="form-group">
+
+            <label for="inputPassword1" class="text col-sm-2 control-label">&nbsp;&nbsp;&nbsp;&nbsp;旧密码：</label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control login " id="inputPassword1" placeholder="旧密码">
+            </div>
+        </div>
+        <div class="form-group">
+        <label for="inputPassword2" class="text col-sm-2 control-label">&nbsp;&nbsp;&nbsp;&nbsp;新密码：</label>
+        <div class="col-sm-10">
+            <input type="password" class="form-control login" id="inputPassword2" placeholder="新密码">
+        </div>
+    </div>
+        <div class="form-group">
+            <label for="inputPassword3" class="text col-sm-2 control-label">确认新密码：</label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control login" id="inputPassword3" placeholder="再次输入">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn2 btn-default" onclick="javascrtpt:window.location.href='login.jsp'" onfocus="rcheckpassword()">确认</button>
+            </div>
+        </div>
+    </form>
+    <input type="password" class="form-control login " id="inputPassword" style="visibility:hidden" placeholder="旧密码">
+
+</div>
+<div class="bottom">
+    <p class="bottomp">
+        北京海融盛世投资管理有限公司     技术支持
+    </p>
+</div>
+</body>
+</html>

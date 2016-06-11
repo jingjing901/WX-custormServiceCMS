@@ -1,0 +1,133 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<%
+String basePath=request.getScheme()+"://"+request.getServerName()+":"+
+request.getServerPort()+request.getContextPath()+"/";
+%>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>角色管理</title>
+    <link href="../PC/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="../PC/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <script src="../PC/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <link href="../PC/PCcss.css" rel="stylesheet" type="text/css">
+    <link href="../PC/account/account.css" rel="stylesheet" type="text/css">
+</head>
+<script type="text/javascript" src="../PC/JS/jquery-1.7.2.js"></script>
+<script type="text/javascript">
+    function ShowByPage(){
+        $.ajax({
+                    url:"<%=basePath %>Role/queryAll.do",
+                    type:"post",
+                    dataType:"json",
+                    success:function(data){
+                        var obj=$("#theTable");
+                        obj.empty();
+                        for(var i=0;i<data.length;i++){
+                            obj.append("<tr><td>"+data[i].rId+"</td><td>"+data[i].rName+"</td><td>"+data[i].rDesc+"</td><td><a href='<%=basePath%>Role/query.do?roleId="+data[i].rId+" target='_self''>编辑</a></td></tr>");
+                        }
+                    }
+                }
+        );
+    }
+</script>
+<body>
+<div class="container-fluid top" >
+    <p class="first"><img class="logo" src="../PC/image/logo.png">烟草客服系统后台</p>
+    <c:if test="${role.wentizhuangjie==1}">
+        <a href="<%=basePath %>Ask/queryItAll.do?pageNum=1" class="btn btn1" role="button" >问题转接</a>
+    </c:if>
+    <c:if test="${role.wendaguanli==1}">
+        <a href="<%=basePath %>Ask/queryHasAll.do?pageNum=1" class="btn btn1" role="button" >问答管理</a>
+    </c:if>
+    <c:if test="${role.tongjixinxi==1}">
+        <a href="<%=basePath %>PC/queryAll.do?pageNum=1" class="btn1 btn" role="button" >统计信息</a>
+    </c:if>
+    <c:if test="${role.zhanghaoquanxian==1||role.zhanghaoquanxian==2||role.zhanghaoquanxian==3}">
+        <a href="<%=basePath %>Address/toCount.do" class="btn1 btn" role="button" >账号权限</a>
+    </c:if>
+    <c:if test="${role.yonghugaunli==1}">
+        <a href="<%=basePath %>Customer/queryAll.do?pageNum=1" class="btn1 btn" role="button" >用户管理</a>
+    </c:if>
+    <c:if test="${role.jiegouguanli==1}">
+        <a href="<%=basePath %>Address/toShow.do" class="btn1 btn"  role="button" >结构管理</a>
+    </c:if>
+    <c:if test="${role.gerenshezhi==1}">
+        <a href="<%=basePath %>Address/toChangeMe.do" class="btn1 btn" role="button" >个人设置</a>
+    </c:if>
+</div>
+<div class="contain">
+    <div class="leftRM">
+        <div class="account">
+            <ul>
+                <li>账号权限</li>
+            </ul>
+        </div>
+        <div class="gl">
+            <ul class="gll">
+                <br/>
+                <c:if test="${role.zhanghaoquanxian==1||role.zhanghaoquanxian==3}">
+                    <li><a class="li" href="<%=basePath %>Address/toCount.do">创建账号</a></li>
+                </c:if>
+                <c:if test="${role.zhanghaoquanxian==2||role.zhanghaoquanxian==3}">
+                    <li><a class="li" href="<%=basePath %>Role/queryAll.do">角色管理</a></li>
+                </c:if>
+                <c:if test="${role.zhanghaoquanxian==1||role.zhanghaoquanxian==3}">
+                    <li><a class="li" href="<%=basePath %>PC/queryAll1.do?pageNum=1">人员管理</a></li>
+                </c:if>
+            </ul>
+        </div>
+    </div>
+    <div class="divrm">
+        <div class="div3">
+            <div class="div6"><span class="temp">后台账号信息搜索</span></div>
+            <div class="div5">
+                <table>
+                    <tr>
+                        <td>
+                            <a href="<%=basePath%>Role/toCreat.do">
+                                <button type="button" class="search btn btn-default btn-sm" id="new">
+                                    <span class="glyphicon glyphicon-search"></span>创建角色
+                                </button>
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="div4"></div>
+        <table class="table table-bordered table-hover">
+
+            <tr class="nrt">
+                <th class="nr">序号</th>
+                <th class="nr">角色名</th>
+                <th class="nr">角色描述</th>
+                <th class="nr">操作</th>
+            </tr>
+            <c:forEach items="${requestScope.roles}" var="role">
+                <tr class="tt" >
+                    <td>${role.rId }</td>
+                    <td>${role.rName}</td>
+                    <td>${role.rDesc}</td>
+                    <td><a href="<%=basePath%>Role/query.do?roleId=${role.rId }">编辑</a></td>
+                </tr>
+            </c:forEach>
+        </table>
+    </div>
+</div>
+
+
+
+
+<div class="bottom">
+    <p class="bottomp">
+        北京海融盛世投资管理有限公司     技术支持
+    </p>
+</div>
+</body>
+</html>

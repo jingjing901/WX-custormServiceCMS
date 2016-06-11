@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!--<%-->
+<!--String basePath=request.getScheme()+"://"+request.getServerName()+":"+-->
+<!--request.getServerPort()+request.getContextPath()+"/";-->
+<!--%>-->
+<head>
+    <meta charset="UTF-8">
+    <title>烟草客服系统后台</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title></title>
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <script src="bootstrap/css/bootstrap.min.js" type="text/javascript"></script>
+    <link href="PCcss.css" rel="stylesheet" type="text/css">
+    <link href="account/account.css" rel="stylesheet" type="text/css">
+</head>
+<div class="container-fluid top" >
+    <p class="first"><img class="logo" src="../PC/image/logo.png">烟草客服系统后台</p>
+    <c:if test="${role.wentizhuangjie==1}">
+        <a href="<%=basePath %>Ask/queryItAll.do?pageNum=1" class="btn btn1" role="button" >问题转接</a>
+    </c:if>
+    <c:if test="${role.wendaguanli==1}">
+        <a href="<%=basePath %>Ask/queryHasAll.do?pageNum=1" class="btn btn1" role="button" >问答管理</a>
+    </c:if>
+    <c:if test="${role.tongjixinxi==1}">
+        <a href="<%=basePath %>PC/queryAll.do?pageNum=1" class="btn1 btn" role="button" >统计信息</a>
+    </c:if>
+    <c:if test="${role.zhanghaoquanxian==1||role.zhanghaoquanxian==2||role.zhanghaoquanxian==3}">
+        <a href="<%=basePath %>Address/toCount.do" class="btn1 btn" role="button" >账号权限</a>
+    </c:if>
+    <c:if test="${role.yonghugaunli==1}">
+        <a href="<%=basePath %>Customer/queryAll.do?pageNum=1" class="btn1 btn" role="button" >用户管理</a>
+    </c:if>
+    <c:if test="${role.jiegouguanli==1}">
+        <a href="<%=basePath %>Address/toShow.do" class="btn1 btn"  role="button" >结构管理</a>
+    </c:if>
+    <c:if test="${role.gerenshezhi==1}">
+        <a href="<%=basePath %>Address/toChangeMe.do" class="btn1 btn" role="button" >个人设置</a>
+    </c:if>
+</div>
+
+<table class="accounttb">
+    <tr>
+        <td>
+            <div class="left">
+                <div class="account">
+                    <ul>
+                        <li>账号权限</li>
+                    </ul>
+                </div>
+                <div class="gl">
+                    <ul class="gll">
+                        <br/>
+                        <li><a class="li" href="<%=basePath %>Address/toCount.do">创建角色</a></li>
+                        <li><a class="li" href="<%=basePath %>Role/queryAll.do">角色管理</a></li>
+                        <li><a class="li" href="<%=basePath %>PC/queryAll1.do?pageNum=1">人员管理</a></li>
+                    </ul>
+                </div>
+            </div>
+        </td>
+        <td>
+            <!--<div class="div1">-->
+            <div class="div2">
+                <div class="div3"> <span class="temp">后台角色列表</span>
+                    <button class="btn btn-disploy btnjs"><a class="cjjslj" href="RoleCreate.jsp" target="rightFrame">创建角色</a></button>
+                </div>
+                <div class="div4"></div>
+                <table class="table table-bordered table-hover">
+                    <tr class="nrt">
+                        <th class="nr">序号</th>
+                        <th class="nr">角色名</th>
+                        <th class="nr">角色描述</th>
+                        <th class="nr">操作</th>
+                    </tr>
+                    <tr>
+                        <td>001</td>
+                        <td>nihao</td>
+                        <td>nihao</td>
+                        <td><a href="#">编辑</a></td>
+                    </tr>
+                </table>
+            </div>
+            <!--</div>-->
+        </td>
+    </tr>
+</table>
+
+
+
+<div class="bottom">
+    <p class="bottomp">
+        北京海融盛世投资管理有限公司     技术支持
+    </p>
+</div>
+</html>

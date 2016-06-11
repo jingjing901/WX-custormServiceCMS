@@ -1,0 +1,43 @@
+.roleedit{
+    border: 1px #dcdcdc solid;
+    width: 96%;
+    height: 400px;
+    margin-left: 8%;
+}
+.leftRMq{
+    border: 1px #dcdcdc solid;
+    width: 80%;
+    /*margin-left: 10%;*/
+    height: 300px;
+    background: #dcdcdc;
+    color: limegreen;
+    margin-left: 10%;
+    margin-top: 30px;
+}
+.leftRMc{
+    border: 1px #dcdcdc solid;
+    width: 60%;
+    /*margin-left: 10%;*/
+    height: 300px;
+    background: #dcdcdc;
+    color: limegreen;
+    margin-left: 10%;
+    margin-top: 30px;
+}
+tr{
+    margin-top: 10px;
+}
+.rolespeak{
+    height: 40px;
+}
+.rcreate{
+    height: 20px;
+    margin-bottom: 10px;
+}
+.zs{
+    width: 30px;
+    text-align: center;
+}
+.countedit{
+
+}

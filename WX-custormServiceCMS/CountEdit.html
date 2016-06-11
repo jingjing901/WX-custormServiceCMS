@@ -1,0 +1,195 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<%
+String basePath=request.getScheme()+"://"+request.getServerName()+":"+
+request.getServerPort()+request.getContextPath()+"/";
+%>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>账号编辑</title>
+    <link href="../PC/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="../PC/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <script src="../PC/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <link href="../PC/PCcss.css" rel="stylesheet" type="text/css">
+    <link href="../PC/account/account.css" rel="stylesheet" type="text/css">
+    <link href="../PC/account/accountstyle.css" rel="stylesheet" type="text/css">
+</head>
+<script type="text/javascript" src="../PC/JS/jquery-1.7.2.js"></script>
+<script type="text/javascript">
+    function getRole(){
+        getAddress();
+        $.ajax({
+                    url:"<%=basePath %>Role/queryAll1.do",
+                    type:"post",
+                    dataType:"json",
+                    success:function(data){
+                        var obj=$("#select1");
+                        obj.empty();
+                        obj.append("<option value='${emplRole.rId}'>${emplRole.rName}</option>");
+                        for(var i=0;i<data.length;i++){
+                            obj.append("<option value='"+data[i].rId+"''>"+data[i].rName+"</option>");
+                        }
+                    }
+                }
+        );
+    }
+    function getAddress(){
+        $.ajax({
+                    url:"<%=basePath %>Address/query.do",
+                    type:"post",
+                    dataType:"json",
+                    success:function(data){
+                        var obj=$("#select2");
+                        obj.empty();
+                        obj.append("<option value='${address.saleorgCode}'>${address.aName}</option>");
+                        for(var i=0;i<data.length;i++){
+                            obj.append("<option value='"+data[i].saleorgCode+"''>"+data[i].aName+"</option>");
+                        }
+                    }
+                }
+        );
+    }
+    function getDepartment(){
+        var a= document.getElementById("select2").value;
+        $.ajax({
+                    url:"<%=basePath %>Department/queryByAId.do",
+                    type:"post",
+                    data:"addressId="+a,
+                    dataType:"json",
+                    success:function(data){
+                        var obj=$("#select3");
+                        obj.empty();
+                        obj.append("<option value='${department.dId}+'>${department.dName}</option>");
+                        for(var i=0;i<data.length;i++){
+                            obj.append("<option value='"+data[i].dId+"''>"+data[i].dName+"</option>");
+                        }
+                    }
+                }
+        );
+    }
+</script>
+<body onload="getRole()">
+<div class="container-fluid top" >
+    <p class="first"><img class="logo" src="../PC/image/logo.png">烟草客服系统后台</p>
+    <c:if test="${role.wentizhuangjie==1}">
+        <a href="<%=basePath %>Ask/queryItAll.do?pageNum=1" class="btn btn1" role="button" >问题转接</a>
+    </c:if>
+    <c:if test="${role.wendaguanli==1}">
+        <a href="<%=basePath %>Ask/queryHasAll.do?pageNum=1" class="btn btn1" role="button" >问答管理</a>
+    </c:if>
+    <c:if test="${role.tongjixinxi==1}">
+        <a href="<%=basePath %>PC/queryAll.do?pageNum=1" class="btn1 btn" role="button" >统计信息</a>
+    </c:if>
+    <c:if test="${role.zhanghaoquanxian==1||role.zhanghaoquanxian==2||role.zhanghaoquanxian==3}">
+        <a href="<%=basePath %>Address/toCount.do" class="btn1 btn" role="button" >账号权限</a>
+    </c:if>
+    <c:if test="${role.yonghugaunli==1}">
+        <a href="<%=basePath %>Customer/queryAll.do?pageNum=1" class="btn1 btn" role="button" >用户管理</a>
+    </c:if>
+    <c:if test="${role.jiegouguanli==1}">
+        <a href="<%=basePath %>Address/toShow.do" class="btn1 btn"  role="button" >结构管理</a>
+    </c:if>
+    <c:if test="${role.gerenshezhi==1}">
+        <a href="<%=basePath %>Address/toChangeMe.do" class="btn1 btn" role="button" >个人设置</a>
+    </c:if>
+</div>
+<div class="contain">
+    <div class="leftRM">
+        <div class="account">
+            <ul>
+                <li>账号权限</li>
+            </ul>
+        </div>
+        <div class="gl">
+            <ul class="gll">
+                <br/>
+                <li><a class="li" href="<%=basePath %>Address/toCount.do">创建角色</a></li>
+                <li><a class="li" href="<%=basePath %>Role/queryAll.do">角色管理</a></li>
+                <li><a class="li" href="<%=basePath %>PC/queryAll1.do?pageNum=1">人员管理</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="accoun">
+        <form action="../PC/updateOther.do" method="post">
+                    <div class="roleedit2">
+                        <div class="edit" style="text-align: center;background: lightgreen "><span>账号编辑</span></div>
+                        <table class="table">
+                            <tr >
+                                <td class="edit1">用户名：</td>
+                                <td><input readOnly="true" class="form-control" value="${employee.eNumber}" name="employeeNumber"></td>
+                            </tr>
+                            <tr></tr>
+                            <tr>
+                                <td class="edit1">序号：</td>
+                                <td><input readOnly="true" class="form-control" value="${employee.eId}" name="employeeId"></td>
+                            </tr>
+                            <tr>
+                                <td class="edit1">姓名：</td>
+                                <td><input readOnly="true" class="form-control" value="${employee.eName}" name="employeeName"></td>
+                            </tr>
+                            <tr>
+                                <td class="edit1">手机号：</td>
+                                <td><input class="form-control edit" name="employeePhone"></td>
+                            </tr>
+                            <tr>
+                                <td class="edit1">角色：</td>
+                                <td><select class="form-control" style="width: 60%" id="select1" name="employeeRId">
+
+                                </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="edit1">所属机构：</td>
+                                <td><select class="form-control" id="select2" onchange="getDepartment()">
+                                </select>
+                                    <select class="form-control" id="select3" name="employeeDId">
+                                        <option value="${department.dId}">${department.dName}</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="edit1">账户状态：</td>
+                                <td>
+                                    <form>
+                                        <c:if test="${employee.eState==1}">
+                                            <input type="radio" name="employeeState" value="1" checked="checked">开启
+                                            <input type="radio" name="employeeState" value="0">关闭
+                                        </c:if>
+                                        <c:if test="${employee.eState==0}">
+                                            <input type="radio" name="employeeState" value="1" >开启
+                                            <input type="radio" name="employeeState" value="0" checked="checked">关闭
+                                        </c:if>
+                                    </form>
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="edit1">新密码：</td>
+                                <td><input class="edit" name="employeePwd"></td>
+                            </tr>
+                            <tr>
+                                <td class="edit1">备注：</td>
+                                <td><input class="edit" name="employeeDesc"></td>
+                            </tr>
+                            <tr>
+                                <td><button class="btn" style="margin-left: 280%" type="submit" >保存</button></td>
+                            </tr>
+                        </table>
+                    </div>
+                </td>
+                </tr>
+        </form>
+    </div>
+</div>
+
+
+
+<div class="bottom">
+    <p class="bottomp">
+        北京海融盛世投资管理有限公司     技术支持
+    </p>
+</div>
+</body>
+</html>

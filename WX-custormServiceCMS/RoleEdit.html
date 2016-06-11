@@ -1,0 +1,190 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!--<%-->
+<!--String basePath=request.getScheme()+"://"+request.getServerName()+":"+-->
+<!--request.getServerPort()+request.getContextPath()+"/";-->
+<!--%>-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>角色编辑</title>
+    <!--<link href="../PC/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">-->
+    <!--<link href="../PC/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">-->
+    <!--<script src="../PC/bootstrap/css/bootstrap.min.js" type="text/javascript"></script>-->
+    <!--<link href="../PC/PCcss.css" rel="stylesheet" type="text/css">-->
+    <!--<link href="../PC/account/account.css" rel="stylesheet" type="text/css">-->
+    <!--<link href="../PC/account/accountstyle.css" rel="stylesheet" type="text/css">-->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <script src="bootstrap/css/bootstrap.min.js" type="text/javascript"></script>
+    <link href="../PChtml/PCcss.css" rel="stylesheet" type="text/css">
+    <link href="account/account.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div class="container-fluid top" >
+    <p class="first"><img class="logo" src="../PC/image/logo.png">烟草客服系统后台</p>
+    <c:if test="${role.wentizhuangjie==1}">
+        <a href="<%=basePath %>Ask/queryItAll.do?pageNum=1" class="btn btn1" role="button" >问题转接</a>
+    </c:if>
+    <c:if test="${role.wendaguanli==1}">
+        <a href="<%=basePath %>Ask/queryHasAll.do?pageNum=1" class="btn btn1" role="button" >问答管理</a>
+    </c:if>
+    <c:if test="${role.tongjixinxi==1}">
+        <a href="<%=basePath %>PC/queryAll.do?pageNum=1" class="btn1 btn" role="button" >统计信息</a>
+    </c:if>
+    <c:if test="${role.zhanghaoquanxian==1||role.zhanghaoquanxian==2||role.zhanghaoquanxian==3}">
+        <a href="<%=basePath %>Address/toCount.do" class="btn1 btn" role="button" >账号权限</a>
+    </c:if>
+    <c:if test="${role.yonghugaunli==1}">
+        <a href="<%=basePath %>Customer/queryAll.do?pageNum=1" class="btn1 btn" role="button" >用户管理</a>
+    </c:if>
+    <c:if test="${role.jiegouguanli==1}">
+        <a href="<%=basePath %>Address/toShow.do" class="btn1 btn"  role="button" >结构管理</a>
+    </c:if>
+    <c:if test="${role.gerenshezhi==1}">
+        <a href="<%=basePath %>Address/toChangeMe.do" class="btn1 btn" role="button" >个人设置</a>
+    </c:if>
+</div>
+<div class="contain">
+    <div class="leftRM">
+        <div class="account">
+            <ul>
+                <li>账号权限</li>
+            </ul>
+        </div>
+        <div class="gl">
+            <ul class="gll">
+                <br/>
+                <li><a class="li" href="<%=basePath %>Address/toCount.do">创建角色</a></li>
+                <li><a class="li" href="<%=basePath %>Role/queryAll.do">角色管理</a></li>
+                <li><a class="li" href="<%=basePath %>PC/queryAll1.do?pageNum=1">人员管理</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="chose">
+        <form action="../Role/update.do" method="post" >
+            <input name="rId" value="${roleIt.rId}" type="hidden">
+            <table class="accounttb">
+                <tr>
+                    <td>
+                        <div class="roleedit1">
+                            <table>
+                                <tr>
+                                    <td>角色名：</td>
+                                    <td >${roleIt.rName}<input name="roleName" value="${roleIt.rName}" type="hidden"></td>
+
+                                </tr>
+                                <tr>
+                                    <td>角色描述：</td>
+                                    <td><textarea cols="40" rows="3" id="text" class="text" name="desc" onkeyup="tjzs()" onfocus="if(this.value=='请输入角色描述...')
+          {this.value='';}this.style.color='#787878';"  onblur="if(this.value=='')
+           {this.value='请输入角色描述...';this.style.color='#787878';}this.style.color='#787878';" >${roleIt.rDesc}</textarea></td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 70%;"></td>
+                                    <td style="padding-left: 10%">
+                                        <input type="text" id="zs" class="zs" value="0" lang="4" onkeypress="javascript:document.getElementById('text').value=this.value.length"/>
+                                        <span class="pp">/300</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>角色权限：</td>
+                                </tr>
+                                    <tr style="font-size: 16px">
+                                        <td style="padding-left: 20%"><c:if test="${roleIt.wentizhuangjie==1}">
+                                            <input type="checkbox" name="wentizhuanjie" checked="checked">问题转接<br>
+                                        </c:if>
+                                            <c:if test="${roleIt.wentizhuangjie==0}">
+                                                <input type="checkbox" name="wentizhuanjie">问题转接<br>
+                                            </c:if>
+                                        </td>
+                                        <td><c:if test="${roleIt.wendaguanli==1}">
+                                            <input type="checkbox" name="Wendaguanli" checked="checked">问答管理<br>
+                                        </c:if>
+                                            <c:if test="${roleIt.wendaguanli==0}">
+                                                <input type="checkbox" name="Wendaguanli">问答管理<br>
+                                            </c:if>
+                                        </td>
+                                    </tr>
+                                    <tr style="font-size: 16px">
+                                        <td style="padding-left: 20%"><c:if test="${roleIt.zhanghaoquanxian==1||roleIt.zhanghaoquanxian==2||roleIt.zhanghaoquanxian==3}">
+                                            <input type="checkbox" name="zhanghaoquanxian"  checked="checked">账号权限<br>
+                                        </c:if>
+                                            <c:if test="${roleIt.zhanghaoquanxian==0}">
+                                                <input type="checkbox" name="zhanghaoquanxian" >账号权限<br>
+                                            </c:if>
+                                        </td>
+                                        <td><c:if test="${roleIt.tongjixinxi==1}">
+                                            <input type="checkbox" name="tongjixinxi"  checked="checked">统计信息<br>
+                                        </c:if>
+                                            <c:if test="${roleIt.tongjixinxi==0}">
+                                                <input type="checkbox" name="tongjixinxi" >统计信息<br>
+                                            </c:if>
+                                        </td>
+                                    </tr>
+                                    <tr style="font-size: 14px">
+                                        <td style="padding-left: 30%"><c:if test="${roleIt.zhanghaoquanxian==1||roleIt.zhanghaoquanxian==3}">
+                                            <input type="checkbox" name="chaungjianzhanghao"  checked="checked">创建账号<br>
+                                        </c:if>
+                                            <c:if test="${roleIt.zhanghaoquanxian==0||roleIt.zhanghaoquanxian==2}">
+                                                <input type="checkbox" name="chaungjianzhanghao" >创建账号<br>
+                                            </c:if>
+                                        </td>
+                                    </tr>
+                                    <tr style="font-size: 14px">
+                                        <td style="padding-left: 30%"><c:if test="${roleIt.wentizhuangjie==2||roleIt.wentizhuangjie==3}">
+                                            <input type="checkbox" name="jueseguanli" >角色管理<br>
+                                        </c:if>
+                                            <c:if test="${roleIt.wentizhuangjie==0||roleIt.wentizhuangjie==1}">
+                                                <input type="checkbox" name="jueseguanli" >角色管理<br>
+                                            </c:if>
+                                        </td>
+                                    </tr>
+                                    <tr style="font-size: 16px">
+                                        <td style="padding-left: 20%"><c:if test="${roleIt.yonghugaunli==1}">
+                                            <input type="checkbox" name="onghugaunli" checked="checked">用户管理<br>
+                                        </c:if>
+                                            <c:if test="${roleIt.yonghugaunli==0}">
+                                                <input type="checkbox" name="onghugaunli" >用户管理<br>
+                                            </c:if>
+                                        </td>
+                                        <td><c:if test="${roleIt.jiegouguanli==1}">
+                                            <input type="checkbox" name="jiegouguanli" checked="checked">结构管理<br>
+                                        </c:if>
+                                            <c:if test="${roleIt.jiegouguanli==0}">
+                                                <input type="checkbox" name="jiegouguanli">结构管理<br>
+                                            </c:if>
+                                        </td>
+                                    </tr>
+                                    <tr style="font-size: 16px">
+                                        <td style="padding-left: 20%"><c:if test="${roleIt.gerenshezhi==1}">
+                                            <input type="checkbox" name="gerenshezhi" checked="checked">个人设置<br>
+                                        </c:if>
+                                            <c:if test="${roleIt.gerenshezhi==0}">
+                                                <input type="checkbox" name="gerenshezhi">个人设置<br>
+                                            </c:if>
+                                        </td>
+                                    </tr>
+
+                                <tr>
+                                    <td></td>
+                                    <td><button type="submit" class="btn">保存</button></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+</body>
+
+
+<div class="bottom">
+    <p class="bottomp">
+        北京海融盛世投资管理有限公司     技术支持
+    </p>
+</div>
+</html>
